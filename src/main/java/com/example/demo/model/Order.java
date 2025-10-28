@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 訂單實體類別
@@ -18,7 +16,6 @@ import org.slf4j.LoggerFactory;
 @Table(name = "orders")
 public class Order {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Order.class);
 	
 	/**
 	 * 訂單ID（主鍵）
@@ -243,7 +240,6 @@ public class Order {
 	 * 預設建構子
 	 */
 	public Order() {
-		logger.info("建立新的 Order 物件");
 	}
 	
 	/**
@@ -253,7 +249,6 @@ public class Order {
 	 * @param customer 客戶
 	 */
 	public Order(String orderNo, Customer customer) {
-		logger.info("建立 Order 物件 - orderNo: {}, customer: {}", 
 					orderNo, customer != null ? customer.getId() : null);
 		this.orderNo = orderNo;
 		this.customer = customer;
@@ -267,7 +262,6 @@ public class Order {
 	 * @return 訂單ID
 	 */
 	public Long getId() {
-		logger.debug("取得 Order ID: {}", id);
 		return id;
 	}
 	
@@ -277,7 +271,6 @@ public class Order {
 	 * @param id 訂單ID
 	 */
 	public void setId(Long id) {
-		logger.debug("設定 Order ID: {}", id);
 		this.id = id;
 	}
 	
@@ -287,7 +280,6 @@ public class Order {
 	 * @return 訂單編號
 	 */
 	public String getOrderNo() {
-		logger.debug("取得 orderNo: {}", orderNo);
 		return orderNo;
 	}
 	
@@ -297,7 +289,6 @@ public class Order {
 	 * @param orderNo 訂單編號
 	 */
 	public void setOrderNo(String orderNo) {
-		logger.debug("設定 orderNo: {}", orderNo);
 		this.orderNo = orderNo;
 	}
 	
@@ -307,7 +298,6 @@ public class Order {
 	 * @return 客戶
 	 */
 	public Customer getCustomer() {
-		logger.debug("取得 customer (Order ID: {})", id);
 		return customer;
 	}
 	
@@ -317,7 +307,6 @@ public class Order {
 	 * @param customer 客戶
 	 */
 	public void setCustomer(Customer customer) {
-		logger.info("設定 customer - Customer ID: {} (Order ID: {})", 
 					customer != null ? customer.getId() : null, id);
 		this.customer = customer;
 	}
@@ -328,7 +317,6 @@ public class Order {
 	 * @return 訂單總金額
 	 */
 	public BigDecimal getTotalAmount() {
-		logger.debug("取得 totalAmount: {}", totalAmount);
 		return totalAmount;
 	}
 	
@@ -338,7 +326,6 @@ public class Order {
 	 * @param totalAmount 訂單總金額
 	 */
 	public void setTotalAmount(BigDecimal totalAmount) {
-		logger.info("設定 totalAmount: {} (Order ID: {})", totalAmount, id);
 		this.totalAmount = totalAmount;
 	}
 	
@@ -348,7 +335,6 @@ public class Order {
 	 * @return 訂單狀態
 	 */
 	public OrderStatus getStatus() {
-		logger.debug("取得 status: {}", status);
 		return status;
 	}
 	
@@ -358,7 +344,6 @@ public class Order {
 	 * @param status 訂單狀態
 	 */
 	public void setStatus(OrderStatus status) {
-		logger.info("設定 Order status: {} (Order ID: {})", status, id);
 		this.status = status;
 	}
 	
@@ -368,7 +353,6 @@ public class Order {
 	 * @return 配送地址
 	 */
 	public String getShippingAddress() {
-		logger.debug("取得 shippingAddress: {}", shippingAddress);
 		return shippingAddress;
 	}
 	
@@ -378,7 +362,6 @@ public class Order {
 	 * @param shippingAddress 配送地址
 	 */
 	public void setShippingAddress(String shippingAddress) {
-		logger.debug("設定 shippingAddress: {}", shippingAddress);
 		this.shippingAddress = shippingAddress;
 	}
 	
@@ -388,7 +371,6 @@ public class Order {
 	 * @return 付款方式
 	 */
 	public PaymentMethod getPaymentMethod() {
-		logger.debug("取得 paymentMethod: {}", paymentMethod);
 		return paymentMethod;
 	}
 	
@@ -398,7 +380,6 @@ public class Order {
 	 * @param paymentMethod 付款方式
 	 */
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		logger.info("設定 paymentMethod: {} (Order ID: {})", paymentMethod, id);
 		this.paymentMethod = paymentMethod;
 	}
 	
@@ -408,7 +389,6 @@ public class Order {
 	 * @return 付款狀態
 	 */
 	public PaymentStatus getPaymentStatus() {
-		logger.debug("取得 paymentStatus: {}", paymentStatus);
 		return paymentStatus;
 	}
 	
@@ -418,7 +398,6 @@ public class Order {
 	 * @param paymentStatus 付款狀態
 	 */
 	public void setPaymentStatus(PaymentStatus paymentStatus) {
-		logger.info("設定 paymentStatus: {} (Order ID: {})", paymentStatus, id);
 		this.paymentStatus = paymentStatus;
 	}
 	
@@ -428,7 +407,6 @@ public class Order {
 	 * @return 備註
 	 */
 	public String getNotes() {
-		logger.debug("取得 notes");
 		return notes;
 	}
 	
@@ -438,7 +416,6 @@ public class Order {
 	 * @param notes 備註
 	 */
 	public void setNotes(String notes) {
-		logger.debug("設定 notes");
 		this.notes = notes;
 	}
 	
@@ -457,7 +434,6 @@ public class Order {
 	 * @param createdAt 建立時間
 	 */
 	public void setCreatedAt(LocalDateTime createdAt) {
-		logger.debug("設定 createdAt: {}", createdAt);
 		this.createdAt = createdAt;
 	}
 	
@@ -476,7 +452,6 @@ public class Order {
 	 * @param updatedAt 更新時間
 	 */
 	public void setUpdatedAt(LocalDateTime updatedAt) {
-		logger.debug("設定 updatedAt: {}", updatedAt);
 		this.updatedAt = updatedAt;
 	}
 	
@@ -487,7 +462,6 @@ public class Order {
 	 */
 	public boolean canCancel() {
 		boolean canCancel = status == OrderStatus.PENDING || status == OrderStatus.PROCESSING;
-		logger.debug("檢查是否可以取消訂單: {} (Order ID: {})", canCancel, id);
 		return canCancel;
 	}
 	
@@ -495,7 +469,6 @@ public class Order {
 	 * 取消訂單
 	 */
 	public void cancel() {
-		logger.info("取消訂單 (Order ID: {}, orderNo: {})", id, orderNo);
 		this.status = OrderStatus.CANCELLED;
 	}
 	
@@ -503,7 +476,6 @@ public class Order {
 	 * 完成付款
 	 */
 	public void completePayment() {
-		logger.info("完成付款 (Order ID: {}, orderNo: {})", id, orderNo);
 		this.paymentStatus = PaymentStatus.PAID;
 	}
 	
@@ -511,7 +483,6 @@ public class Order {
 	 * 標記為已出貨
 	 */
 	public void markAsShipped() {
-		logger.info("標記為已出貨 (Order ID: {}, orderNo: {})", id, orderNo);
 		this.status = OrderStatus.SHIPPED;
 	}
 	
@@ -519,7 +490,6 @@ public class Order {
 	 * 標記為已送達
 	 */
 	public void markAsDelivered() {
-		logger.info("標記為已送達 (Order ID: {}, orderNo: {})", id, orderNo);
 		this.status = OrderStatus.DELIVERED;
 	}
 	

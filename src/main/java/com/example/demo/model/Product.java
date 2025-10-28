@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 商品實體類別
@@ -18,7 +16,6 @@ import org.slf4j.LoggerFactory;
 @Table(name = "product")
 public class Product {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Product.class);
 	
 	/**
 	 * 商品ID（主鍵）
@@ -92,7 +89,6 @@ public class Product {
 	 * 預設建構子
 	 */
 	public Product() {
-		logger.info("建立新的 Product 物件");
 	}
 
 	/**
@@ -103,7 +99,6 @@ public class Product {
 	 * @param price 商品價格
 	 */
 	public Product(String name, String type, BigDecimal price) {
-		logger.info("建立 Product 物件 - name: {}, type: {}, price: {}", name, type, price);
 		this.name = name;
 		this.type = type;
 		this.price = price;
@@ -174,7 +169,6 @@ public class Product {
 	 * @return 商品ID
 	 */
 	public Long getId() {
-		logger.debug("取得 Product ID: {}", id);
 		return id;
 	}
 	
@@ -184,7 +178,6 @@ public class Product {
 	 * @param id 商品ID
 	 */
 	public void setId(Long id) {
-		logger.debug("設定 Product ID: {}", id);
 		this.id = id;
 	}
 
@@ -194,7 +187,6 @@ public class Product {
 	 * @return 商品名稱
 	 */
 	public String getName() {
-		logger.debug("取得 name: {}", name);
 		return name;
 	}
 
@@ -204,7 +196,6 @@ public class Product {
 	 * @param name 商品名稱
 	 */
 	public void setName(String name) {
-		logger.debug("設定 name: {}", name);
 		this.name = name;
 	}
 
@@ -214,7 +205,6 @@ public class Product {
 	 * @return 商品描述
 	 */
 	public String getDescription() {
-		logger.debug("取得 description");
 		return description;
 	}
 
@@ -224,7 +214,6 @@ public class Product {
 	 * @param description 商品描述
 	 */
 	public void setDescription(String description) {
-		logger.debug("設定 description");
 		this.description = description;
 	}
 
@@ -234,7 +223,6 @@ public class Product {
 	 * @return 圖片 URL
 	 */
 	public String getImageUrl() {
-		logger.debug("取得 imageUrl: {}", imageUrl);
 		return imageUrl;
 	}
 
@@ -244,7 +232,6 @@ public class Product {
 	 * @param imageUrl 圖片 URL
 	 */
 	public void setImageUrl(String imageUrl) {
-		logger.debug("設定 imageUrl: {}", imageUrl);
 		this.imageUrl = imageUrl;
 	}
 
@@ -254,7 +241,6 @@ public class Product {
 	 * @return 商品類型
 	 */
 	public String getType() {
-		logger.debug("取得 type: {}", type);
 		return type;
 	}
 
@@ -264,7 +250,6 @@ public class Product {
 	 * @param type 商品類型
 	 */
 	public void setType(String type) {
-		logger.debug("設定 type: {}", type);
 		this.type = type;
 	}
 
@@ -274,7 +259,6 @@ public class Product {
 	 * @return 商品價格
 	 */
 	public BigDecimal getPrice() {
-		logger.debug("取得 price: {}", price);
 		return price;
 	}
 
@@ -284,7 +268,6 @@ public class Product {
 	 * @param price 商品價格
 	 */
 	public void setPrice(BigDecimal price) {
-		logger.debug("設定 price: {}", price);
 		this.price = price;
 	}
 
@@ -294,7 +277,6 @@ public class Product {
 	 * @return 商品狀態
 	 */
 	public ProductStatus getStatus() {
-		logger.debug("取得 status: {}", status);
 		return status;
 	}
 
@@ -304,7 +286,6 @@ public class Product {
 	 * @param status 商品狀態
 	 */
 	public void setStatus(ProductStatus status) {
-		logger.info("設定 Product status: {} (Product ID: {})", status, id);
 		this.status = status;
 	}
 
@@ -323,7 +304,6 @@ public class Product {
 	 * @param createdAt 建立時間
 	 */
 	public void setCreatedAt(LocalDateTime createdAt) {
-		logger.debug("設定 createdAt: {}", createdAt);
 		this.createdAt = createdAt;
 	}
 
@@ -342,7 +322,6 @@ public class Product {
 	 * @param updatedAt 更新時間
 	 */
 	public void setUpdatedAt(LocalDateTime updatedAt) {
-		logger.debug("設定 updatedAt: {}", updatedAt);
 		this.updatedAt = updatedAt;
 	}
 	
@@ -353,7 +332,6 @@ public class Product {
 	 */
 	public boolean isActive() {
 		boolean active = status == ProductStatus.ACTIVE;
-		logger.debug("檢查 Product 是否上架: {} (Product ID: {})", active, id);
 		return active;
 	}
 	
@@ -364,7 +342,6 @@ public class Product {
 	 */
 	public boolean isOutOfStock() {
 		boolean outOfStock = status == ProductStatus.OUT_OF_STOCK;
-		logger.debug("檢查 Product 是否缺貨: {} (Product ID: {})", outOfStock, id);
 		return outOfStock;
 	}
 	
@@ -372,7 +349,6 @@ public class Product {
 	 * 下架商品
 	 */
 	public void deactivate() {
-		logger.info("下架商品 (Product ID: {}, name: {})", id, name);
 		this.status = ProductStatus.INACTIVE;
 	}
 	
@@ -380,7 +356,6 @@ public class Product {
 	 * 上架商品
 	 */
 	public void activate() {
-		logger.info("上架商品 (Product ID: {}, name: {})", id, name);
 		this.status = ProductStatus.ACTIVE;
 	}
 	
@@ -388,7 +363,6 @@ public class Product {
 	 * 標記為缺貨
 	 */
 	public void markAsOutOfStock() {
-		logger.info("標記商品為缺貨 (Product ID: {}, name: {})", id, name);
 		this.status = ProductStatus.OUT_OF_STOCK;
 	}
 

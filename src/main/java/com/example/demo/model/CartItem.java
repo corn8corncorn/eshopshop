@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 購物車明細實體類別
@@ -18,7 +16,6 @@ import org.slf4j.LoggerFactory;
 @Table(name = "cart_items")
 public class CartItem {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CartItem.class);
 	
 	/**
 	 * 購物車明細ID（主鍵）
@@ -85,7 +82,6 @@ public class CartItem {
 	 * 預設建構子
 	 */
 	public CartItem() {
-		logger.info("建立新的 CartItem 物件");
 	}
 	
 	/**
@@ -97,7 +93,6 @@ public class CartItem {
 	 * @param unitPrice 商品單價
 	 */
 	public CartItem(Cart cart, Product product, Integer quantity, BigDecimal unitPrice) {
-		logger.info("建立 CartItem 物件 - cart: {}, product: {}, quantity: {}, unitPrice: {}", 
 					cart != null ? cart.getId() : null, 
 					product != null ? product.getId() : null, 
 					quantity, unitPrice);
@@ -115,7 +110,6 @@ public class CartItem {
 	 * @return 購物車明細ID
 	 */
 	public Long getId() {
-		logger.debug("取得 CartItem ID: {}", id);
 		return id;
 	}
 	
@@ -125,7 +119,6 @@ public class CartItem {
 	 * @param id 購物車明細ID
 	 */
 	public void setId(Long id) {
-		logger.debug("設定 CartItem ID: {}", id);
 		this.id = id;
 	}
 	
@@ -135,7 +128,6 @@ public class CartItem {
 	 * @return 所屬購物車
 	 */
 	public Cart getCart() {
-		logger.debug("取得 cart (CartItem ID: {})", id);
 		return cart;
 	}
 	
@@ -145,7 +137,6 @@ public class CartItem {
 	 * @param cart 所屬購物車
 	 */
 	public void setCart(Cart cart) {
-		logger.info("設定 cart - Cart ID: {} (CartItem ID: {})", 
 					cart != null ? cart.getId() : null, id);
 		this.cart = cart;
 	}
@@ -156,7 +147,6 @@ public class CartItem {
 	 * @return 商品
 	 */
 	public Product getProduct() {
-		logger.debug("取得 product (CartItem ID: {})", id);
 		return product;
 	}
 	
@@ -166,7 +156,6 @@ public class CartItem {
 	 * @param product 商品
 	 */
 	public void setProduct(Product product) {
-		logger.info("設定 product - Product ID: {} (CartItem ID: {})", 
 					product != null ? product.getId() : null, id);
 		this.product = product;
 	}
@@ -177,7 +166,6 @@ public class CartItem {
 	 * @return 購買數量
 	 */
 	public Integer getQuantity() {
-		logger.debug("取得 quantity: {}", quantity);
 		return quantity;
 	}
 	
@@ -188,12 +176,10 @@ public class CartItem {
 	 * @param quantity 購買數量
 	 */
 	public void setQuantity(Integer quantity) {
-		logger.info("設定 quantity: {} (CartItem ID: {})", quantity, id);
 		this.quantity = quantity;
 		// 自動重新計算小計
 		if (this.unitPrice != null) {
 			this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(quantity));
-			logger.debug("重新計算 subtotal: {}", this.subtotal);
 		}
 	}
 	
@@ -203,7 +189,6 @@ public class CartItem {
 	 * @return 商品單價
 	 */
 	public BigDecimal getUnitPrice() {
-		logger.debug("取得 unitPrice: {}", unitPrice);
 		return unitPrice;
 	}
 	
@@ -214,12 +199,10 @@ public class CartItem {
 	 * @param unitPrice 商品單價
 	 */
 	public void setUnitPrice(BigDecimal unitPrice) {
-		logger.info("設定 unitPrice: {} (CartItem ID: {})", unitPrice, id);
 		this.unitPrice = unitPrice;
 		// 自動重新計算小計
 		if (this.quantity != null) {
 			this.subtotal = unitPrice.multiply(BigDecimal.valueOf(this.quantity));
-			logger.debug("重新計算 subtotal: {}", this.subtotal);
 		}
 	}
 	
@@ -229,7 +212,6 @@ public class CartItem {
 	 * @return 小計
 	 */
 	public BigDecimal getSubtotal() {
-		logger.debug("取得 subtotal: {}", subtotal);
 		return subtotal;
 	}
 	
@@ -239,7 +221,6 @@ public class CartItem {
 	 * @param subtotal 小計
 	 */
 	public void setSubtotal(BigDecimal subtotal) {
-		logger.debug("設定 subtotal: {}", subtotal);
 		this.subtotal = subtotal;
 	}
 	
@@ -258,7 +239,6 @@ public class CartItem {
 	 * @param createdAt 建立時間
 	 */
 	public void setCreatedAt(LocalDateTime createdAt) {
-		logger.debug("設定 createdAt: {}", createdAt);
 		this.createdAt = createdAt;
 	}
 	
@@ -277,7 +257,6 @@ public class CartItem {
 	 * @param updatedAt 更新時間
 	 */
 	public void setUpdatedAt(LocalDateTime updatedAt) {
-		logger.debug("設定 updatedAt: {}", updatedAt);
 		this.updatedAt = updatedAt;
 	}
 	
@@ -288,10 +267,8 @@ public class CartItem {
 	public void calculateSubtotal() {
 		if (this.unitPrice != null && this.quantity != null && this.quantity > 0) {
 			this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
-			logger.info("計算 subtotal: {} (quantity: {}, unitPrice: {})", 
 						this.subtotal, this.quantity, this.unitPrice);
 		} else {
-			logger.warn("無法計算 subtotal - unitPrice: {}, quantity: {}", 
 						this.unitPrice, this.quantity);
 		}
 	}
@@ -303,7 +280,6 @@ public class CartItem {
 	 */
 	public void increaseQuantity(Integer additionalQuantity) {
 		if (additionalQuantity != null && additionalQuantity > 0) {
-			logger.info("增加數量: {} -> {} (CartItem ID: {})", 
 						this.quantity, this.quantity + additionalQuantity, id);
 			setQuantity(this.quantity + additionalQuantity);
 		}
@@ -316,11 +292,9 @@ public class CartItem {
 	 */
 	public void decreaseQuantity(Integer decreaseQuantity) {
 		if (decreaseQuantity != null && decreaseQuantity > 0 && this.quantity > decreaseQuantity) {
-			logger.info("減少數量: {} -> {} (CartItem ID: {})", 
 						this.quantity, this.quantity - decreaseQuantity, id);
 			setQuantity(this.quantity - decreaseQuantity);
 		} else {
-			logger.warn("無法減少數量 - 當前數量: {}, 嘗試減少: {}", this.quantity, decreaseQuantity);
 		}
 	}
 	
@@ -332,12 +306,10 @@ public class CartItem {
 	 */
 	public void updatePrice(BigDecimal newPrice) {
 		if (newPrice != null && newPrice.compareTo(BigDecimal.ZERO) >= 0) {
-			logger.info("更新商品價格: {} -> {} (CartItem ID: {})", 
 						this.unitPrice, newPrice, id);
 			this.unitPrice = newPrice;
 			calculateSubtotal();
 		} else {
-			logger.warn("無效的價格更新 - newPrice: {}", newPrice);
 		}
 	}
 	
@@ -349,12 +321,10 @@ public class CartItem {
 	 */
 	public boolean isProductValid() {
 		if (product == null) {
-			logger.warn("商品不存在 (CartItem ID: {})", id);
 			return false;
 		}
 		
 		boolean isValid = product.isActive() && !product.isOutOfStock();
-		logger.debug("檢查商品有效性: {} (Product ID: {}, CartItem ID: {})", 
 					isValid, product.getId(), id);
 		return isValid;
 	}

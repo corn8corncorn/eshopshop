@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 使用者實體類別
@@ -16,8 +14,6 @@ import org.slf4j.LoggerFactory;
 @Entity
 @Table(name = "users")
 public class User {
-    
-    private static final Logger logger = LoggerFactory.getLogger(User.class);
     
     /**
      * 使用者ID（主鍵）
@@ -84,7 +80,6 @@ public class User {
      * 預設建構子
      */
     public User() {
-        logger.info("建立新的 User 物件");
     }
     
     /**
@@ -95,7 +90,6 @@ public class User {
      * @param password 密碼
      */
     public User(String username, String email, String password) {
-        logger.info("建立 User 物件 - username: {}", username);
         this.username = username;
         this.email = email;
         this.password = password;
@@ -109,7 +103,6 @@ public class User {
      * @return 使用者ID
      */
     public Long getId() {
-        logger.debug("取得 User ID: {}", id);
         return id;
     }
     
@@ -119,7 +112,6 @@ public class User {
      * @param id 使用者ID
      */
     public void setId(Long id) {
-        logger.debug("設定 User ID: {}", id);
         this.id = id;
     }
     
@@ -129,7 +121,6 @@ public class User {
      * @return 使用者名稱
      */
     public String getUsername() {
-        logger.debug("取得 username: {}", username);
         return username;
     }
     
@@ -139,7 +130,6 @@ public class User {
      * @param username 使用者名稱
      */
     public void setUsername(String username) {
-        logger.debug("設定 username: {}", username);
         this.username = username;
     }
     
@@ -149,7 +139,6 @@ public class User {
      * @return 電子郵件
      */
     public String getEmail() {
-        logger.debug("取得 email: {}", email);
         return email;
     }
     
@@ -159,7 +148,6 @@ public class User {
      * @param email 電子郵件
      */
     public void setEmail(String email) {
-        logger.debug("設定 email: {}", email);
         this.email = email;
     }
     
@@ -169,7 +157,6 @@ public class User {
      * @return 密碼（加密後的）
      */
     public String getPassword() {
-        logger.debug("取得密碼");
         return password;
     }
     
@@ -179,7 +166,6 @@ public class User {
      * @param password 密碼
      */
     public void setPassword(String password) {
-        logger.debug("設定密碼");
         this.password = password;
     }
     
@@ -198,7 +184,6 @@ public class User {
      * @param createdAt 建立時間
      */
     public void setCreatedAt(LocalDateTime createdAt) {
-        logger.debug("設定 createdAt: {}", createdAt);
         this.createdAt = createdAt;
     }
     
@@ -217,7 +202,6 @@ public class User {
      * @param updatedAt 更新時間
      */
     public void setUpdatedAt(LocalDateTime updatedAt) {
-        logger.debug("設定 updatedAt: {}", updatedAt);
         this.updatedAt = updatedAt;
     }
     
@@ -227,7 +211,6 @@ public class User {
      * @return true: 啟用, false: 停用
      */
     public Boolean getEnabled() {
-        logger.debug("取得 enabled: {}", enabled);
         return enabled;
     }
     
@@ -237,7 +220,6 @@ public class User {
      * @param enabled 啟用狀態
      */
     public void setEnabled(Boolean enabled) {
-        logger.info("設定 User enabled 狀態: {} (ID: {})", enabled, id);
         this.enabled = enabled;
     }
     
@@ -247,7 +229,6 @@ public class User {
      * @return 使用者角色
      */
     public UserRole getRole() {
-        logger.debug("取得 role: {}", role);
         return role;
     }
     
@@ -257,7 +238,6 @@ public class User {
      * @param role 使用者角色
      */
     public void setRole(UserRole role) {
-        logger.info("設定 User role: {} (ID: {})", role, id);
         this.role = role;
     }
     
@@ -267,16 +247,13 @@ public class User {
      * @return true: 是管理員, false: 非管理員
      */
     public boolean isAdmin() {
-        boolean isAdmin = role == UserRole.ADMIN;
-        logger.debug("檢查是否為管理員: {} (username: {})", isAdmin, username);
-        return isAdmin;
+        return role == UserRole.ADMIN;
     }
     
     /**
      * 停用帳號
      */
     public void disable() {
-        logger.info("停用帳號 (ID: {}, username: {})", id, username);
         this.enabled = false;
     }
     
@@ -284,7 +261,6 @@ public class User {
      * 啟用帳號
      */
     public void enable() {
-        logger.info("啟用帳號 (ID: {}, username: {})", id, username);
         this.enabled = true;
     }
     

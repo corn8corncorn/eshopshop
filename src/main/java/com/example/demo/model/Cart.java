@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 購物車實體類別
@@ -17,7 +15,6 @@ import org.slf4j.LoggerFactory;
 @Table(name = "carts")
 public class Cart {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Cart.class);
 	
 	/**
 	 * 購物車ID（主鍵）
@@ -55,7 +52,6 @@ public class Cart {
 	 * 預設建構子
 	 */
 	public Cart() {
-		logger.info("建立新的 Cart 物件");
 	}
 	
 	/**
@@ -64,7 +60,6 @@ public class Cart {
 	 * @param customer 所屬客戶
 	 */
 	public Cart(Customer customer) {
-		logger.info("建立 Cart 物件 - customer: {}", 
 					customer != null ? customer.getId() : null);
 		this.customer = customer;
 	}
@@ -75,7 +70,6 @@ public class Cart {
 	 * @return 購物車ID
 	 */
 	public Long getId() {
-		logger.debug("取得 Cart ID: {}", id);
 		return id;
 	}
 	
@@ -85,7 +79,6 @@ public class Cart {
 	 * @param id 購物車ID
 	 */
 	public void setId(Long id) {
-		logger.debug("設定 Cart ID: {}", id);
 		this.id = id;
 	}
 	
@@ -95,7 +88,6 @@ public class Cart {
 	 * @return 所屬客戶
 	 */
 	public Customer getCustomer() {
-		logger.debug("取得 customer (Cart ID: {})", id);
 		return customer;
 	}
 	
@@ -105,7 +97,6 @@ public class Cart {
 	 * @param customer 所屬客戶
 	 */
 	public void setCustomer(Customer customer) {
-		logger.info("設定 customer - Customer ID: {} (Cart ID: {})", 
 					customer != null ? customer.getId() : null, id);
 		this.customer = customer;
 	}
@@ -125,7 +116,6 @@ public class Cart {
 	 * @param createdAt 建立時間
 	 */
 	public void setCreatedAt(LocalDateTime createdAt) {
-		logger.debug("設定 createdAt: {}", createdAt);
 		this.createdAt = createdAt;
 	}
 	
@@ -144,7 +134,6 @@ public class Cart {
 	 * @param updatedAt 更新時間
 	 */
 	public void setUpdatedAt(LocalDateTime updatedAt) {
-		logger.debug("設定 updatedAt: {}", updatedAt);
 		this.updatedAt = updatedAt;
 	}
 	
@@ -158,7 +147,6 @@ public class Cart {
 		if (customer != null && customer.getUser() != null) {
 			ownerName = customer.getUser().getUsername();
 		}
-		logger.debug("取得購物車擁有者: {} (Cart ID: {})", ownerName, id);
 		return ownerName;
 	}
 	

@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 客戶實體類別
@@ -17,7 +15,6 @@ import org.slf4j.LoggerFactory;
 @Table(name = "customers")
 public class Customer {
     
-    private static final Logger logger = LoggerFactory.getLogger(Customer.class);
     
     /**
      * 客戶ID（主鍵）
@@ -104,7 +101,6 @@ public class Customer {
      * 預設建構子
      */
     public Customer() {
-        logger.info("建立新的 Customer 物件");
     }
     
     /**
@@ -114,7 +110,6 @@ public class Customer {
      * @param name 客戶姓名
      */
     public Customer(User user, String name) {
-        logger.info("建立 Customer 物件 - name: {}", name);
         this.user = user;
         this.name = name;
     }
@@ -128,7 +123,6 @@ public class Customer {
      * @param address 地址
      */
     public Customer(User user, String name, String phone, String address) {
-        logger.info("建立 Customer 物件 - name: {}, phone: {}", name, phone);
         this.user = user;
         this.name = name;
         this.phone = phone;
@@ -141,7 +135,6 @@ public class Customer {
      * @return 客戶ID
      */
     public Long getId() {
-        logger.debug("取得 Customer ID: {}", id);
         return id;
     }
     
@@ -151,7 +144,6 @@ public class Customer {
      * @param id 客戶ID
      */
     public void setId(Long id) {
-        logger.debug("設定 Customer ID: {}", id);
         this.id = id;
     }
     
@@ -161,7 +153,6 @@ public class Customer {
      * @return 使用者帳號
      */
     public User getUser() {
-        logger.debug("取得 User 關聯 (Customer ID: {})", id);
         return user;
     }
     
@@ -171,7 +162,6 @@ public class Customer {
      * @param user 使用者帳號
      */
     public void setUser(User user) {
-        logger.info("設定 User 關聯 - User ID: {} (Customer ID: {})", 
                     user != null ? user.getId() : null, id);
         this.user = user;
     }
@@ -182,7 +172,6 @@ public class Customer {
      * @return 客戶姓名
      */
     public String getName() {
-        logger.debug("取得 name: {}", name);
         return name;
     }
     
@@ -192,7 +181,6 @@ public class Customer {
      * @param name 客戶姓名
      */
     public void setName(String name) {
-        logger.debug("設定 name: {}", name);
         this.name = name;
     }
     
@@ -202,7 +190,6 @@ public class Customer {
      * @return 連絡電話
      */
     public String getPhone() {
-        logger.debug("取得 phone: {}", phone);
         return phone;
     }
     
@@ -212,7 +199,6 @@ public class Customer {
      * @param phone 連絡電話
      */
     public void setPhone(String phone) {
-        logger.debug("設定 phone: {}", phone);
         this.phone = phone;
     }
     
@@ -222,7 +208,6 @@ public class Customer {
      * @return 地址
      */
     public String getAddress() {
-        logger.debug("取得 address: {}", address);
         return address;
     }
     
@@ -232,7 +217,6 @@ public class Customer {
      * @param address 地址
      */
     public void setAddress(String address) {
-        logger.debug("設定 address: {}", address);
         this.address = address;
     }
     
@@ -242,7 +226,6 @@ public class Customer {
      * @return 城市
      */
     public String getCity() {
-        logger.debug("取得 city: {}", city);
         return city;
     }
     
@@ -252,7 +235,6 @@ public class Customer {
      * @param city 城市
      */
     public void setCity(String city) {
-        logger.debug("設定 city: {}", city);
         this.city = city;
     }
     
@@ -262,7 +244,6 @@ public class Customer {
      * @return 郵遞區號
      */
     public String getPostalCode() {
-        logger.debug("取得 postalCode: {}", postalCode);
         return postalCode;
     }
     
@@ -272,7 +253,6 @@ public class Customer {
      * @param postalCode 郵遞區號
      */
     public void setPostalCode(String postalCode) {
-        logger.debug("設定 postalCode: {}", postalCode);
         this.postalCode = postalCode;
     }
     
@@ -282,7 +262,6 @@ public class Customer {
      * @return 國家
      */
     public String getCountry() {
-        logger.debug("取得 country: {}", country);
         return country;
     }
     
@@ -292,7 +271,6 @@ public class Customer {
      * @param country 國家
      */
     public void setCountry(String country) {
-        logger.debug("設定 country: {}", country);
         this.country = country;
     }
     
@@ -302,7 +280,6 @@ public class Customer {
      * @return 生日
      */
     public LocalDateTime getBirthday() {
-        logger.debug("取得 birthday: {}", birthday);
         return birthday;
     }
     
@@ -312,7 +289,6 @@ public class Customer {
      * @param birthday 生日
      */
     public void setBirthday(LocalDateTime birthday) {
-        logger.debug("設定 birthday: {}", birthday);
         this.birthday = birthday;
     }
     
@@ -322,7 +298,6 @@ public class Customer {
      * @return 性別
      */
     public String getGender() {
-        logger.debug("取得 gender: {}", gender);
         return gender;
     }
     
@@ -332,7 +307,6 @@ public class Customer {
      * @param gender 性別（M: 男性, F: 女性, O: 其他）
      */
     public void setGender(String gender) {
-        logger.debug("設定 gender: {}", gender);
         this.gender = gender;
     }
     
@@ -351,7 +325,6 @@ public class Customer {
      * @param createdAt 建立時間
      */
     public void setCreatedAt(LocalDateTime createdAt) {
-        logger.debug("設定 createdAt: {}", createdAt);
         this.createdAt = createdAt;
     }
     
@@ -370,7 +343,6 @@ public class Customer {
      * @param updatedAt 更新時間
      */
     public void setUpdatedAt(LocalDateTime updatedAt) {
-        logger.debug("設定 updatedAt: {}", updatedAt);
         this.updatedAt = updatedAt;
     }
     
@@ -408,7 +380,6 @@ public class Customer {
         }
         
         String result = fullAddress.toString();
-        logger.debug("取得完整地址: {}", result);
         return result;
     }
     
